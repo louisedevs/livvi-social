@@ -8,13 +8,13 @@ import { bootstrapApplication } from '@angular/platform-browser';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrls: ['./app.css']
+  templateUrl: './home/home.component.html',
+  styleUrls: ['./app.component.css']
 })
-export class App {
+export class AppComponent {
   protected title = 'livvi-social-frontend';
 }
-bootstrapApplication(App, {
+bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes)
   ]
