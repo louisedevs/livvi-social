@@ -1,6 +1,42 @@
 .titulo {
-  font-size: 40px;
-  font-family: Arial;
-  color: #FFFFFF;
-  background: black;;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.main-container {
+  display: flex;
+  justify-content: space-around; /*Distribui o espaço entre os intens */
+  align-items: center; /* Alinha os itens verticalmente */
+  width: 100%; /* garantir que o container ocupa a tela,opcional */
+  min-height: 100vh; /* Garante que o container tenha no minimo a altura da tela */
+}
+/* O main-container é o container principal que envolve todo o conteúdo da página. 
+   Ele usa flexbox para distribuir os itens horizontalmente e centralizá-los verticalmente. */
+.titulo h1 {
+  font-size: 200px;
+  font-family: "Caudex", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #ffffff;
+  text-align: center;
+  margin-top: -100px;
+}
+.home-description p {
+  font-size: 15px;
+  font-family: "Inria Serif", serif;
+  font-weight: 100;
+  font-style: normal;
+  color: white;
+  margin-top: -30px;
+}
+
+.quadro-login-container {
+  width: 400px;
+  height: 500px;
+  background-color: #ffffff25;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  
 }
