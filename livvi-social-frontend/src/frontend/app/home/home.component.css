@@ -40,3 +40,25 @@
   place-items: center;
   
 }
+
+.dropdown-item {
+  color: aliceblue;
+  font-family: "Inria Serif", serif;
+}
+
+.dropdown-item:hover {
+  background-color: transparent;
+  color: #CCCCCC;
+  text-decoration: underline;
+}
+
+.form-group label {
+  color: aliceblue;
+  font-family: "Inria Serif", serif;
+  font-size: 16px;
+}
+
+.form-check-label {
+  color: aliceblue;
+  font-family: "Inria Serif", serif;
+}
