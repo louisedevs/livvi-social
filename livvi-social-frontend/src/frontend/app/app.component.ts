@@ -3,15 +3,15 @@ import { provideRouter, RouterOutlet } from '@angular/router';
 import { routes } from './app.routes';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home/home.component';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,
-    CommonModule,
-    HomeComponent
+  imports: [CommonModule,
+    RouterOutlet,
+     RouterLink 
   ],
 
   templateUrl: './app.component.html',

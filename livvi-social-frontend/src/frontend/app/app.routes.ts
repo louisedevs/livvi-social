@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
   {
@@ -11,7 +12,7 @@ export const routes: Routes = [
   }
   ,
   {
-    path: 'escolha-conta',
-    loadComponent: () => import('./escolha-conta/escolha-conta.component').then(m => m.EscolhaContaComponent)
+    path: 'register',
+    loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent)
   }
 ];
