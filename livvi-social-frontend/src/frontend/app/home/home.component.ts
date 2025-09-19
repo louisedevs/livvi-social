@@ -3,12 +3,13 @@
 // --- Importações no topo do arquivo ---
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-
+import { RouterLink } from '@angular/router';
+import { RouterModule } from '@angular/router';
 // --- @Component decorator ---
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

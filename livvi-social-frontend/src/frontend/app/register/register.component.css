@@ -1,0 +1,77 @@
+/* Importa a fonte no topo do CSS */
+@import url('https://fonts.googleapis.com/css2?family=Caudex:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* :host continua igual, centralizando tudo na tela */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f4f4f4; /* Um fundo cinza bem claro para a página */
+}
+
+/* O container que abraça o título e a caixa de opções */
+.selection-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem; /* Espaço entre o título e a caixa preta */
+  padding: 1rem;
+}
+
+/* Estilo para o título, que agora está fora da caixa */
+.selection-title {
+  font-family: "Caudex", serif;
+  font-weight: 700;
+  color: #333; /* Cor escura para o texto */
+  text-align: center;
+}
+
+/* A CAIXA PRETA FOSCA - AQUI ESTÁ A MÁGICA */
+.options-box {
+  display: flex; /* Alinha as opções lado a lado */
+  align-items: stretch; /* Faz as opções terem a mesma altura */
+  background-color: rgba(25, 25, 25, 0.9); /* Preto com 90% de opacidade */
+  border-radius: 12px; /* Cantos mais arredondados */
+  padding: 1.5rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+  width: 100%;
+  max-width: 700px;
+}
+
+/* O estilo de cada opção clicável DENTRO da caixa preta */
+.register-option {
+  flex: 1; /* Faz com que cada opção ocupe metade do espaço */
+  padding: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 8px; /* Cantos arredondados internos */
+  
+  /* Animação suave */
+  transition: background-color 0.2s ease-in-out;
+}
+
+.register-option:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Efeito de brilho ao passar o mouse */
+}
+
+/* Estilo do texto dentro da caixa preta */
+.register-option h2 {
+  font-family: "Caudex", serif;
+  font-weight: 700;
+  color: #ffffff; /* Texto branco */
+  margin-bottom: 0.5rem;
+}
+
+.register-option p {
+  font-family: "Caudex", serif;
+  font-size: 1rem;
+  color: #c7c7c7; /* Cinza claro para o texto de apoio */
+}
+
+/* A linha vertical que separa as opções */
+.divider {
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.2); /* Linha branca semi-transparente */
+}
