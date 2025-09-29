@@ -40,11 +40,16 @@
   margin-bottom: 30px;
 }
 
-/* Ajustes para os campos do formulário do Bootstrap */
+/* Adiciona um espaço ABAIXO de todo o grupo (label + input) */
+.form-group {
+  margin-bottom: 1.5rem; /* 1.5rem é um bom espaço, pode aumentar se quiser */
+}
+
+/* Ajusta a regra que já tínhamos para a label */
 .form-group label {
   text-align: left;
-  display: block; /* Garante que a label ocupe a linha toda */
-  margin-bottom: 5px;
+  display: block;
+  margin-bottom: 0.5rem; /* Adiciona um espacinho pequeno entre a label e o input */
 }
 
 .form-control {
