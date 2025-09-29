@@ -1,21 +1,27 @@
+<video #videoPlayer class="background-video" autoplay muted loop playsinline>
+  <source src="assets/videos/Vídeo_Inclusivo_Rolês_Conectados_Naturalmente.mp4" type="video/mp4">
+</video>
+
+<div class="video-overlay"></div>
+
+<div class="video-overlay"></div>
+
 <div class="selection-wrapper">
-
   <h1 class="selection-title">Como você quer usar o Livvi?</h1>
-
   <div class="options-box">
-
     <a routerLink="/register/personal" class="register-option">
       <h2>Para mim</h2>
       <p>Quero descobrir e avaliar os melhores rolês.</p>
     </a>
-    
     <div class="divider"></div>
-
     <a routerLink="/register/business" class="register-option">
       <h2>Para meu negócio</h2>
       <p>Quero cadastrar e divulgar meu negócio.</p>
     </a>
-
   </div>
-
 </div>
+
+<button (click)="toggleSound()" class="sound-toggle-btn">
+  <span *ngIf="isMuted">🔇</span>
+  <span *ngIf="!isMuted">🔊</span>
+</button>
