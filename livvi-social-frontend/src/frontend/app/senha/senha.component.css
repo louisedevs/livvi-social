@@ -1,0 +1,73 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.senha-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* O nosso card com o efeito preto fosco */
+.senha-card {
+  background-color: rgba(25, 25, 25, 0.9); /* O mesmo preto fosco */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px; /* Um pouco mais largo para o conteúdo */
+  text-align: center;
+  color: white;
+}
+
+/* Estilo para o nosso logo! */
+.senha-logo {
+  width: 80px; /* Tamanho do logo */
+  margin-bottom: 20px; /* Espaço entre o logo e o título */
+}
+
+.senha-title {
+  margin-bottom: 10px;
+}
+
+.senha-text {
+  color: #c7c7c7; /* O mesmo cinza claro do outro componente */
+  margin-bottom: 30px;
+}
+
+/* Ajustes para os campos do formulário do Bootstrap */
+.form-group label {
+  text-align: left;
+  display: block; /* Garante que a label ocupe a linha toda */
+  margin-bottom: 5px;
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.form-control::placeholder {
+  color: #aaa;
+}
+
+/* Link para voltar */
+.senha-back-link {
+  margin-top: 20px;
+}
+
+.senha-back-link a {
+  color: #c7c7c7;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.senha-back-link a:hover {
+  text-decoration: underline;
+}
