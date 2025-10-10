@@ -1,1 +1,40 @@
-<p>user works!</p>
+<div class="register-user-page">
+
+  <div class="form-panel">
+
+    <div class="header">
+      <h2>Crie sua conta Livvi</h2>
+      <p>O seu próximo rolê inesquecível começa aqui.</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      
+      <div class="input-group">
+        <label for="name">Seu nome</label>
+        <input type="text" id="name" required [(ngModel)]="user.name" name="name" #name="ngModel">
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error-message">
+          <small>Opa, seu nome é importante!</small>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="email">Seu melhor email</label>
+        <input type="email" id="email" required email [(ngModel)]="user.email" name="email" #email="ngModel">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+          <small>Precisamos de um email válido para te encontrar.</small>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="password">Crie uma senha</label>
+        <input type="password" id="password" required minlength="6" [(ngModel)]="user.password" name="password" #password="ngModel">
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+          <small>A senha precisa ter no mínimo 6 caracteres.</small>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-livvi" [disabled]="userForm.invalid">Criar Minha Conta ✨</button>
+    
+    </form>
+  </div>
+</div>

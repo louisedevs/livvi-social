@@ -1,0 +1,104 @@
+:host {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* O fundo da página inteira */
+.register-user-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5; /* Um cinza bem claro, estilo Apple */
+  padding: 20px;
+}
+
+/* O painel flutuante, mais alto e elegante */
+.form-panel {
+  background-color: white;
+  padding: 50px 40px;
+  border-radius: 20px; /* Cantos mais arredondados */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Sombra suave e moderna */
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1c1e21; /* Um preto mais suave */
+  margin-bottom: 10px;
+}
+
+.header p {
+  font-size: 1.1rem;
+  color: #606770; /* Um cinza para o subtítulo */
+  margin-bottom: 40px;
+}
+
+/* Grupo de input (label + campo) */
+.input-group {
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+  color: #606770;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* O input com estilo moderno (só a linha embaixo) */
+.input-group input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #ccd0d5; /* Linha cinza */
+  padding: 10px 2px; /* Espaçamento interno */
+  font-size: 1.1rem;
+  background-color: transparent;
+  transition: border-color 0.2s ease; /* Animação suave */
+}
+
+/* Efeito quando o usuário clica no campo */
+.input-group input:focus {
+  outline: none; /* Tira a borda azul padrão do navegador */
+  border-bottom-color: #7c4dff; /* Uma cor roxa vibrante */
+}
+
+/* Mensagem de erro */
+.error-message {
+  color: #fa383e;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+/* O NOSSO NOVO BOTÃO ESTILOSO */
+.btn-livvi {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  background-image: linear-gradient(to right, #8e2de2, #4a00e0); /* Degradê roxo/azul */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+.btn-livvi:hover {
+  box-shadow: 0 5px 15px rgba(142, 45, 226, 0.4); /* Sombra da cor do botão */
+  transform: translateY(-2px);
+}
+
+/* Estilo do botão quando desabilitado */
+.btn-livvi:disabled {
+  background-image: none;
+  background-color: #ccd0d5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}

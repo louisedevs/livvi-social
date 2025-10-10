@@ -17,9 +17,14 @@ export const routes: Routes = [
     path: 'senha',
     loadComponent: () => import('./senha/senha.component').then(m => m.SenhaComponent)
   },
-  // ESTA É A ROTA CORRIGIDA:
+  
   {
     path: 'register/user', // 1. Caminho correto do link
-    loadComponent: () => import('./user.component').then(m => m.UserComponent) // 2 e 3. Arquivo e Classe corretos
+loadComponent: () => import('./register-user/user.component').then(m => m.UserComponent)  
+  },
+
+  {
+    path: 'register/business', 
+    loadComponent: () => import('./register-business/business.component').then(m => m.BusinessComponent)
   }
-];
+]
