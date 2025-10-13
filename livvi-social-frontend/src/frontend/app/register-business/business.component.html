@@ -1,1 +1,202 @@
-<p>business works!</p>
+<div class="register-business-page">
+  <div class="form-panel">
+
+    <div class="header">
+      <h2>Registre sua empresa</h2>
+      <p>Junte-se a Livvi e conecte-se com milhares de clientes.</p>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #businessForm="ngForm" class="mt-4">
+
+      <div class="input-group">
+        <label for="nomeFantasia">Nome do seu negócio</label>
+        <input type="text" id="nomeFantasia" class="form-control" required [(ngModel)]="business.nomeFantasia" name="nomeFantasia" #nomeFantasia="ngModel">
+      </div>
+
+      <div class="input-group">
+  <div class="label-com-checkbox">
+    <label for="cnpj">CNPJ</label>
+    <div class="checkbox-container">
+      <input type="checkbox" id="noCnpj" (change)="toggleCnpjField()">
+      <label for="noCnpj">Não possuo CNPJ</label>
+    </div>
+  </div>
+  <input type="text" id="cnpj" class="form-control" [(ngModel)]="business.cnpj" name="cnpj" [disabled]="!possuiCnpj">
+</div>
+
+      <div class="input-group">
+        <label for="email">E-mail de contato</label>
+        <input type="email" id="email" class="form-control" required email [(ngModel)]="business.email" name="email" #email="ngModel">
+      </div>
+      
+      <div class="input-group">
+        <label for="telefone">Telefone / WhatsApp</label>
+        <input type="tel" id="telefone" class="form-control" required [(ngModel)]="business.telefone" name="telefone" #telefone="ngModel">
+      </div>
+
+      <div class="input-group">
+        <label for="password">Crie uma senha</label>
+        <div class="password-wrapper">
+          <input [type]="passwordFieldType" id="password" class="form-control" required minlength="6" [(ngModel)]="business.password" name="password" #password="ngModel">
+          <span class="toggle-password" (click)="togglePasswordVisibility()">👁️</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="confirmPassword">Confirme sua senha</label>
+        <div class="password-wrapper">
+          <input [type]="confirmPasswordFieldType" id="confirmPassword" class="form-control" required [(ngModel)]="business.confirmPassword" name="confirmPassword" #confirmPassword="ngModel">
+          <span class="toggle-password" (click)="toggleConfirmPasswordVisibility()">👁️</span>
+        </div>
+      </div>
+      
+      <hr class="my-4">
+
+      <div class="input-group">
+        <label for="cep">CEP</label>
+        <input type="text" id="cep" class="form-control" required [(ngModel)]="business.cep" name="cep" #cep="ngModel">
+      </div>
+
+      <div class="input-group">
+        <label for="address">Endereço (Rua, Av, Praça...)</label>
+        <input type="text" id="address" class="form-control" required [(ngModel)]="business.endereco" name="endereco" #address="ngModel">
+      </div>
+
+      <div class="form-row">
+        <div class="col">
+          <div class="input-group">
+            <label for="number">Número</label>
+            <input type="text" id="number" class="form-control" required [(ngModel)]="business.numero" name="numero" #number="ngModel">
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <label for="complement">Complemento</label>
+            <input type="text" id="complement" class="form-control" [(ngModel)]="business.complemento" name="complemento" #complemento="ngModel">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col">
+          <div class="input-group">
+            <label for="neighborhood">Bairro</label>
+            <input type="text" id="neighborhood" class="form-control" required [(ngModel)]="business.bairro" name="bairro" #neighborhood="ngModel">
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group">
+            <label for="city">Cidade</label>
+            <input type="text" id="city" class="form-control" required [(ngModel)]="business.cidade" name="cidade" #city="ngModel">
+          </div>
+        </div>
+        <div class="col">
+            <div class="input-group">
+              <label for="state">Estado</label>
+              <input type="text" id="state" class="form-control" required [(ngModel)]="business.estado" name="estado" #state="ngModel">
+            </div>
+          </div>
+      </div> <hr class="my-4">
+
+      <div class="input-group">
+        <label for="businessType">Tipo de Negócio</label>
+        <select class="form-control" id="businessType" required [(ngModel)]="business.tipo" name="tipo" #tipo="ngModel">
+  <option value="" disabled selected>Selecione a categoria principal do seu negócio</option>
+  
+  <optgroup label="GASTRONOMIA">
+    <option value="restaurante">Restaurante</option>
+    <option value="churrascaria">Churrascaria / Steakhouse</option>
+    <option value="bar">Bar</option>
+    <option value="boteco">Boteco / Bar de Esquina</option>
+    <option value="pub">Pub / Cervejaria</option>
+    <option value="adega_winebar">Adega / Wine Bar</option>
+    <option value="hamburgueria">Hamburgueria</option>
+    <option value="cafeteria">Cafeteria / Confeitaria</option>
+    <option value="sorveteria_acai">Sorveteria / Açaí</option>
+    <option value="food_truck">Food Truck / Comida de Rua</option>
+  </optgroup>
+  
+  <optgroup label="NOITE E MÚSICA">
+    <option value="balada">Balada / Boate</option>
+    <option value="rave_festa_eletronica">Rave / Festa Eletrônica</option>
+    <option value="casa_sertaneja">Casa Sertaneja</option>
+    <option value="casa_de_show">Casa de Show</option>
+    <option value="musica_ao_vivo">Música ao Vivo</option>
+    <option value="casa_de_jazz">Casa de Jazz / Blues</option>
+    <option value="roda_de_samba">Roda de Samba</option>
+    <option value="forro">Casa de Forró</option>
+    <option value="karaoke">Karaokê</option>
+    <option value="lounge">Lounge / Rooftop</option>
+    <option value="tabacaria_narguile">Tabacaria / Lounge de Narguilé</option>
+  </optgroup>
+
+  <optgroup label="CULTURA E LAZER">
+    <option value="shopping">Shopping / Centro Comercial</option>
+    <option value="parque_de_diversoes">Parque de Diversões / Aquático</option>
+    <option value="espaco_cultural">Espaço Cultural / SESC</option>
+    <option value="cinema">Cinema</option>
+    <option value="teatro">Teatro</option>
+    <option value="museu_exposicao">Museu / Galeria de Arte</option>
+    <option value="stand_up">Show de Stand-up</option>
+    <option value="livraria">Livraria</option>
+    <option value="feira_de_rua">Feira de Rua / Gastronômica</option>
+    <option value="ponto_turistico">Ponto Turístico / Mirante</option>
+  </optgroup>
+
+  <optgroup label="JOGOS E ESPORTES">
+    <option value="boliche_sinuca">Boliche / Salão de Sinuca</option>
+    <option value="escape_room">Escape Room</option>
+    <option value="laser_tag_paintball">Laser Tag / Paintball</option>
+    <option value="kartodromo">Kartódromo</option>
+    <option value="escalada_indoor">Escalada Indoor / Boulder</option>
+    <option value="clube_de_tiro">Clube de Tiro</option>
+    <option value="arcade_fliperama">Arcade / Fliperama</option>
+    <option value="futebol_society">Quadra de Futebol</option>
+    <option value="beach_tennis_volei">Quadra de Beach Tennis / Vôlei</option>
+    <option value="pista_de_skate">Pista de Skate</option>
+  </optgroup>
+  
+  <optgroup label="FITNESS E BEM-ESTAR">
+    <option value="academia_crossfit">Academia / CrossFit</option>
+    <option value="estudio_pilates_yoga">Estúdio de Pilates / Yoga</option>
+    <option value="centro_esportivo">Centro de Treinamento Esportivo</option>
+  </optgroup>
+
+  <optgroup label="RELAX E BELEZA">
+      <option value="spa">Spa</option>
+      <option value="salao_beleza">Salão de Beleza / Estética</option>
+      <option value="barbearia_premium">Barbearia Premium</option>
+  </optgroup>
+
+  <optgroup label="EVENTOS E OUTROS">
+    <option value="festival">Festival</option>
+    <option value="espaco_eventos">Espaço de Eventos</option>
+    <option value="clube_piscina">Clube / Piscina (Day Use)</option>
+    <option value="beach_club">Beach Club</option>
+    <option value="parque_ar_livre">Parque / Ao Ar Livre</option>
+    <option value="outro">Outro</option>
+  </optgroup>
+</select>
+      </div>
+
+      <div class="form-check mt-4">
+        <input type="checkbox" class="form-check-input" id="terms" required name="terms" ngModel #terms="ngModel">
+        <label class="form-check-label" for="terms">
+          Eu aceito os <a href="#">Termos de Serviço</a> e a <a href="#">Política de Privacidade</a>.
+        </label>
+      </div>
+
+      <button type="submit" class="btn-livvi" [disabled]="businessForm.invalid">Criar Conta de Negócio ✨</button>
+
+    </form>
+  </div>
+</div>
+<div class="modal-overlay" *ngIf="showCnpjWarning">
+  <div class="modal-content">
+    <h4>A importância do CNPJ</h4>
+    <p>
+      Cadastrar seu CNPJ (mesmo que seja de MEI) aumenta a confiança dos usuários e libera funcionalidades exclusivas no futuro. Se você tiver um, recomendamos fortemente que o adicione!
+    </p>
+    <button class="btn-ok" (click)="closeCnpjWarning()">Entendi!</button>
+  </div>
+</div>
