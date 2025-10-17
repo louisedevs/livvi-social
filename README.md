@@ -3,9 +3,9 @@
 > Rede social em desenvolvimento com foco em conexões autênticas e rolês inesquecíveis.
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge" alt="Status do Projeto"/>
-  <img src="https://img.shields.io/github/license/louisedevs/livvi-social?style=for-the-badge" alt="Licença"/>
-  <img src="https://img.shields.io/github/last-commit/louisedevs/livvi-social?style=for-the-badge" alt="Último Commit"/>
+<img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge" alt="Status do Projeto"/>
+<img src="https://img.shields.io/badge/License-GPLv3-blue?style=for-the-badge" alt="Licença GPLv3"/>
+<img src="https://img.shields.io/github/last-commit/louisedevs/livvi-social?style=for-the-badge" alt="Último Commit"/>
 </p>
 
 
