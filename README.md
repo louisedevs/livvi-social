@@ -34,3 +34,18 @@ Para as empresas, reservamos o marketing, onde em seu perfil ela irá promover o
 - [X] Cadastro
 - [X] Cadastro de usuário
 - [X] Cadastro de empresa
+
+### Funcionalidades
+- [X] API REST de autenticação
+- [X] Modelagem de banco de dados(usuários)
+
+## 🔧 Tecnologias
+- **Backend:** Python, Django, API REST
+- **Frontend:** Angular (em desenvolvimento)
+- **Design:** Figma
+- **Banco:** SQLite
+- **Versionamento:** Git/GitHub
+
+## 👩‍💻 Autora
+**Louise Dias**  
+[GitHub](https://github.com/louisedevs) | [LinkedIn](https://linkedin.com/in/louisedias-ti) | louisediasdev@gmail.com
