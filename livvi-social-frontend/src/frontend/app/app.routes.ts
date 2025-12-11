@@ -26,5 +26,15 @@ loadComponent: () => import('./register-user/user.component').then(m => m.UserCo
   {
     path: 'register/business', 
     loadComponent: () => import('./register-business/business.component').then(m => m.BusinessComponent)
+  },
+
+  {
+    path: 'profile-business',
+    loadComponent: () => import('./profile-business/profile.component').then(m => m.ProfileBusinessComponent)
+  },
+
+  {
+    path: 'profile-user',
+    loadComponent: () => import('./profile-user/profileUser.component').then(m => m.ProfileUserComponent)
   }
 ]
