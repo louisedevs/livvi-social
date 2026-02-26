@@ -1,37 +1,75 @@
-<div class="main-container">
-  <div class="titulo">
-    <h1>Livvi</h1>
-    <div class="home-description">
-      <p>Para quem gosta de rolê</p>
+<div class="home-layout">
+
+  <!-- LADO ESQUERDO — Branding -->
+  <div class="brand-side">
+    <div class="brand-content">
+      <h1 class="brand-name">Livvi</h1>
+      <p class="brand-tagline">Para quem gosta de rolê</p>
     </div>
   </div>
 
-  <div class="quadro-login-container">
-    <form class="px-4 py-3">
-      <div class="form-group">
-        <label for="exampleDropdownFormEmail1">Endereço de email</label>
-        <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@exemplo.com">
+  <!-- LADO DIREITO — Login -->
+  <div class="login-side">
+    <div class="login-card">
+
+      <div class="login-header">
+        <h2 class="login-title">Entrar</h2>
       </div>
 
       <div class="form-group">
-        <label for="exampleDropdownFormPassword1">Senha</label>
-        <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Senha">
+        <label class="field-label" for="email">E-mail</label>
+        <input
+          class="field-input"
+          type="email"
+          id="email"
+          placeholder="seu@email.com"
+          [(ngModel)]="email"
+          name="email" />
       </div>
 
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="dropdownCheck">
-        <label class="form-check-label" for="dropdownCheck">
-          Lembre-me
+      <div class="form-group">
+        <label class="field-label" for="senha">Senha</label>
+        <div class="input-wrapper">
+          <input
+            class="field-input"
+            [type]="showPassword ? 'text' : 'password'"
+            id="senha"
+            placeholder="••••••••"
+            [(ngModel)]="password"
+            name="senha" />
+          <button class="toggle-pw" type="button" (click)="showPassword = !showPassword">
+            <svg *ngIf="!showPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg *ngIf="showPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+              <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/>
+              <path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/>
+              <line x1="1" y1="1" x2="23" y2="23"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label class="checkbox-label">
+          <input type="checkbox" class="checkbox" [(ngModel)]="rememberMe" name="rememberMe" />
+          <span>Lembre-me</span>
         </label>
+        <a class="link-subtle" routerLink="/senha">Esqueceu a senha?</a>
       </div>
 
-      <button type="submit" class="btn btn-primary mt-3">Entrar</button>
+      <button class="btn-entrar" type="button" (click)="onLogin()">
+        Entrar
+      </button>
 
-      <div class="dropdown-divider mt-3"></div>
-      <a class="dropdown-item" routerLink="/register">Novo por aqui? Registre-se.</a>
-      <a class="dropdown-item" routerLink="/senha">Esqueceu a senha?</a>
-    </form>
+      <div class="login-divider"></div>
+
+      <p class="register-cta">
+        Novo por aqui?
+        <a class="link-accent" routerLink="/register">Criar conta</a>
+      </p>
+
+    </div>
   </div>
-</div>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</div>

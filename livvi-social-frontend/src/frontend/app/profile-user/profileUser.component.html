@@ -1,9 +1,254 @@
-<div class="main-container">
-    <header class ="navbar">
-        <span class="logo">Livvi</span>
-        <form class="search-form" action="/buscar" method="get">
-            <input type="text" name="q" placeholder="Pesquisar...">
-            <button type="'submit">🔍</button>
-        </form>
-    </header>
+<!--adicionar lugar favorito -->
+
+<div class="app-layout">
+
+  <!-- ══════════════════════════════
+       SIDEBAR
+  ══════════════════════════════ -->
+  <nav class="sidebar" [class.expanded]="sidebarExpanded"
+       (mouseenter)="sidebarExpanded = true"
+       (mouseleave)="sidebarExpanded = false">
+
+    <!-- Logo -->
+    <div class="sidebar-logo">
+      <img src="assets/Logodarkmode_fundopreto.jpg" alt="Livvi" class="logo-img" />
+      <span class="sidebar-label logo-text">Livvi</span>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Nav items -->
+    <ul class="sidebar-nav">
+      <li class="nav-item active" routerLink="/home">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+            <path d="M9 21V12h6v9"/>
+          </svg>
+        </span>
+        <span class="sidebar-label">Início</span>
+      </li>
+
+      <li class="nav-item" routerLink="/messages">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+          </svg>
+        </span>
+        <span class="sidebar-label">Mensagens</span>
+      </li>
+
+      <li class="nav-item" routerLink="/search">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <span class="sidebar-label">Pesquisar</span>
+      </li>
+
+      <li class="nav-item" routerLink="/notifications">
+        <span class="nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 01-3.46 0"/>
+          </svg>
+        </span>
+        <span class="sidebar-label">Notificações</span>
+      </li>
+    </ul>
+
+    <!-- Perfil no rodapé da sidebar -->
+    <div class="sidebar-footer">
+      <div class="sidebar-divider"></div>
+      <div class="nav-item" routerLink="/profile-user">
+        <span class="nav-icon avatar-sm-wrapper">
+          <img [src]="user.avatarUrl || 'assets/default-avatar.png'" class="avatar-sm" alt="perfil"/>
+        </span>
+        <span class="sidebar-label">{{ user.name }}</span>
+      </div>
+    </div>
+
+  </nav>
+
+  <!-- ══════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════ -->
+  <main class="main-content">
+    <div class="profile-page">
+
+      <!-- ── CARD: Identidade ── -->
+      <div class="card identity-card">
+
+        <div class="identity-left">
+          <!-- Avatar clicável -->
+          <div class="avatar-wrapper" (click)="triggerAvatarUpload()" title="Trocar foto">
+            <img class="avatar-img" [src]="user.avatarUrl || 'assets/default-avatar.png'" [alt]="user.name" />
+            <div class="avatar-overlay">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+            <input #avatarInput type="file" accept="image/*" class="avatar-input" (change)="onAvatarChange($event)" />
+          </div>
+
+          <div class="identity-info">
+            <h1 class="user-name">{{ user.name }}</h1>
+            <span class="user-handle">{{ '@' + user.handle }}</span>
+
+            <!-- Status button -->
+            <div class="status-menu-wrapper">
+              <button class="status-btn" [ngClass]="statusClass" (click)="toggleStatusMenu()">
+                <span class="status-indicator"></span>
+                {{ user.status }}
+                <span class="status-chevron">▾</span>
+              </button>
+
+              <div class="status-dropdown" *ngIf="statusMenuOpen">
+                <button class="status-option" *ngFor="let s of statusOptions"
+                  [class.selected]="user.status === s.label"
+                  (click)="setStatus(s)">
+                  <span class="opt-dot" [ngClass]="s.cssClass"></span>
+                  {{ s.label }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-value">{{ user.followers }}</span>
+            <span class="stat-label">seguidores</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <span class="stat-value">{{ user.following }}</span>
+            <span class="stat-label">seguindo</span>
+          </div>
+          <div class="stat-sep"></div>
+          <div class="stat">
+            <span class="stat-value">{{ user.places.length }}</span>
+            <span class="stat-label">lugares</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── GRID: Fotos + Lateral ── -->
+      <div class="content-grid">
+
+        <!-- COLUNA PRINCIPAL -->
+        <div class="col-main">
+
+          <!-- Feed de Fotos -->
+          <div class="card feed-card">
+            <h2 class="card-title">Fotos</h2>
+            <div class="photos-grid">
+              <div class="photo-item" *ngFor="let place of user.places">
+                <div class="photo-thumb-wrapper">
+                  <img class="photo-thumb"
+                    [src]="place.imageUrl || 'assets/placeholder.png'"
+                    [alt]="place.name" />
+                  <div class="photo-badge">{{ place.visits }}x</div>
+                </div>
+                <span class="photo-place-name">{{ place.name }}</span>
+                <span class="photo-visits">{{ place.visits }} visitas</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pensamentos -->
+          <div class="card thought-card">
+            <h2 class="card-title">Pensamentos</h2>
+            <div class="thought-latest" (click)="openThoughtModal()">
+              <p class="thought-text" *ngIf="latestThought">{{ latestThought.text }}</p>
+              <p class="thought-placeholder" *ngIf="!latestThought">o que você tá pensando?</p>
+              <div class="thought-meta" *ngIf="latestThought">
+                <span class="thought-time">{{ latestThought.timeLabel }}</span>
+                <span class="thought-expires">expira em {{ latestThought.expiresLabel }}</span>
+              </div>
+            </div>
+            <button class="thought-add-btn" (click)="openThoughtModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="14" height="14">
+                <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+              </svg>
+              novo pensamento
+            </button>
+          </div>
+
+        </div>
+
+        <!-- COLUNA LATERAL -->
+        <div class="col-side">
+
+          <!-- Reputação Social -->
+          <div class="card reputation-card">
+            <h2 class="card-title">Reputação Social</h2>
+            <div class="rep-list">
+              <div class="rep-item" *ngFor="let rep of user.reputation">
+                <span class="rep-label">{{ rep.label }}</span>
+                <div class="rep-dots">
+                  <span class="rep-dot"
+                    *ngFor="let i of range(5)"
+                    [class.active]="i < rep.score"
+                    [class.warn]="rep.label === 'Sumiço' && i < rep.score">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+<!-- ══════════════════════════════
+     MODAL: Pensamentos
+══════════════════════════════ -->
+<div class="modal-backdrop" *ngIf="thoughtModalOpen" (click)="closeThoughtModal()"></div>
+<div class="thought-modal" *ngIf="thoughtModalOpen">
+
+  <div class="modal-header">
+    <h3 class="modal-title">Pensamentos</h3>
+    <button class="modal-close" (click)="closeThoughtModal()">✕</button>
+  </div>
+
+  <!-- Novo pensamento -->
+  <div class="modal-compose">
+    <textarea
+      class="thought-input"
+      placeholder="o que você tá pensando agora?"
+      [(ngModel)]="newThoughtText"
+      maxlength="280"
+      rows="3">
+    </textarea>
+    <div class="compose-footer">
+      <span class="char-count">{{ newThoughtText.length }}/280</span>
+      <button class="post-btn" (click)="postThought()" [disabled]="!newThoughtText.trim()">
+        soltar
+      </button>
+    </div>
+  </div>
+
+  <!-- Histórico 24h -->
+  <div class="modal-history">
+    <p class="history-label">últimas 24h</p>
+    <div *ngIf="thoughts.length === 0" class="history-empty">nada ainda por aqui</div>
+    <div class="thought-entry" *ngFor="let t of thoughts">
+      <p class="entry-text">{{ t.text }}</p>
+      <div class="entry-meta">
+        <span class="entry-time">{{ t.timeLabel }}</span>
+        <span class="entry-expires">expira em {{ t.expiresLabel }}</span>
+      </div>
+    </div>
+  </div>
+
 </div>
