@@ -1,202 +1,335 @@
-<div class="register-business-page">
-  <div class="form-panel">
+<div class="biz-page">
 
-    <div class="header">
-      <h2>Registre sua empresa</h2>
-      <p>Junte-se a Livvi e conecte-se com milhares de clientes.</p>
+  <!-- Fundo animado -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <!-- PAINEL ESQUERDO — branding fixo -->
+  <aside class="biz-aside">
+    <div class="aside-inner">
+      <a routerLink="/register" class="aside-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="15 18 9 12 15 6"/></svg>
+        Voltar
+      </a>
+
+      <div class="aside-brand">
+        <span class="aside-brand-name">Livvi</span>
+        <p class="aside-brand-tag">para negócios</p>
+      </div>
+
+      <div class="aside-steps">
+        <div class="step-item" [class.active]="currentStep >= 1" [class.done]="currentStep > 1">
+          <div class="step-dot">
+            <svg *ngIf="currentStep > 1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+            <span *ngIf="currentStep <= 1">1</span>
+          </div>
+          <div class="step-text">
+            <span class="step-label">Negócio</span>
+            <span class="step-sub">Nome, CNPJ e tipo</span>
+          </div>
+        </div>
+
+        <div class="step-connector" [class.active]="currentStep > 1"></div>
+
+        <div class="step-item" [class.active]="currentStep >= 2" [class.done]="currentStep > 2">
+          <div class="step-dot">
+            <svg *ngIf="currentStep > 2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+            <span *ngIf="currentStep <= 2">2</span>
+          </div>
+          <div class="step-text">
+            <span class="step-label">Contato</span>
+            <span class="step-sub">Email, telefone e senha</span>
+          </div>
+        </div>
+
+        <div class="step-connector" [class.active]="currentStep > 2"></div>
+
+        <div class="step-item" [class.active]="currentStep >= 3" [class.done]="currentStep > 3">
+          <div class="step-dot">
+            <svg *ngIf="currentStep > 3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg>
+            <span *ngIf="currentStep <= 3">3</span>
+          </div>
+          <div class="step-text">
+            <span class="step-label">Localização</span>
+            <span class="step-sub">Endereço completo</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="aside-footer">
+        <p>Já tem conta?</p>
+        <a routerLink="/home" class="aside-login-link">Entrar no Livvi →</a>
+      </div>
     </div>
+  </aside>
 
-    <form (ngSubmit)="onSubmit()" #businessForm="ngForm" class="mt-4">
+  <!-- PAINEL DIREITO — formulário -->
+  <main class="biz-main">
+    <form (ngSubmit)="onSubmit()" #businessForm="ngForm" class="biz-form">
 
-      <div class="input-group">
-        <label for="nomeFantasia">Nome do seu negócio</label>
-        <input type="text" id="nomeFantasia" class="form-control" required [(ngModel)]="business.nomeFantasia" name="nomeFantasia" #nomeFantasia="ngModel">
-      </div>
-
-      <div class="input-group">
-  <div class="label-com-checkbox">
-    <label for="cnpj">CNPJ</label>
-    <div class="checkbox-container">
-      <input type="checkbox" id="noCnpj" (change)="toggleCnpjField()">
-      <label for="noCnpj">Não possuo CNPJ</label>
-    </div>
-  </div>
-  <input type="text" id="cnpj" class="form-control" [(ngModel)]="business.cnpj" name="cnpj" [disabled]="!possuiCnpj">
-</div>
-
-      <div class="input-group">
-        <label for="email">E-mail de contato</label>
-        <input type="email" id="email" class="form-control" required email [(ngModel)]="business.email" name="email" #email="ngModel">
-      </div>
-      
-      <div class="input-group">
-        <label for="telefone">Telefone / WhatsApp</label>
-        <input type="tel" id="telefone" class="form-control" required [(ngModel)]="business.telefone" name="telefone" #telefone="ngModel">
-      </div>
-
-      <div class="input-group">
-        <label for="password">Crie uma senha</label>
-        <div class="password-wrapper">
-          <input [type]="passwordFieldType" id="password" class="form-control" required minlength="6" [(ngModel)]="business.password" name="password" #password="ngModel">
-          <span class="toggle-password" (click)="togglePasswordVisibility()">👁️</span>
+      <!-- ══ STEP 1: Negócio ══ -->
+      <div class="step-panel" [class.active]="currentStep === 1">
+        <div class="step-header">
+          <span class="step-eyebrow">Passo 1 de 3</span>
+          <h2 class="step-title">Seu negócio</h2>
+          <p class="step-desc">Vamos começar com as informações principais.</p>
         </div>
-      </div>
 
-      <div class="input-group">
-        <label for="confirmPassword">Confirme sua senha</label>
-        <div class="password-wrapper">
-          <input [type]="confirmPasswordFieldType" id="confirmPassword" class="form-control" required [(ngModel)]="business.confirmPassword" name="confirmPassword" #confirmPassword="ngModel">
-          <span class="toggle-password" (click)="toggleConfirmPasswordVisibility()">👁️</span>
-        </div>
-      </div>
-      
-      <hr class="my-4">
+        <div class="fields">
 
-      <div class="input-group">
-        <label for="cep">CEP</label>
-        <input type="text" id="cep" class="form-control" required [(ngModel)]="business.cep" name="cep" #cep="ngModel">
-      </div>
-
-      <div class="input-group">
-        <label for="address">Endereço (Rua, Av, Praça...)</label>
-        <input type="text" id="address" class="form-control" required [(ngModel)]="business.endereco" name="endereco" #address="ngModel">
-      </div>
-
-      <div class="form-row">
-        <div class="col">
-          <div class="input-group">
-            <label for="number">Número</label>
-            <input type="text" id="number" class="form-control" required [(ngModel)]="business.numero" name="numero" #number="ngModel">
+          <div class="field">
+            <label class="field-label">Nome do negócio <span class="req">*</span></label>
+            <input class="field-input" type="text" placeholder="Ex: Bar do Zé, Lounge 42..."
+              required [(ngModel)]="business.nomeFantasia" name="nomeFantasia" #nomeFantasia="ngModel"
+              [class.error]="nomeFantasia.invalid && nomeFantasia.touched" />
+            <span class="field-err" *ngIf="nomeFantasia.invalid && nomeFantasia.touched">Campo obrigatório</span>
           </div>
-        </div>
-        <div class="col">
-          <div class="input-group">
-            <label for="complement">Complemento</label>
-            <input type="text" id="complement" class="form-control" [(ngModel)]="business.complemento" name="complemento" #complemento="ngModel">
-          </div>
-        </div>
-      </div>
 
-      <div class="form-row">
-        <div class="col">
-          <div class="input-group">
-            <label for="neighborhood">Bairro</label>
-            <input type="text" id="neighborhood" class="form-control" required [(ngModel)]="business.bairro" name="bairro" #neighborhood="ngModel">
+          <!-- CNPJ -->
+          <div class="field">
+            <div class="field-label-row">
+              <label class="field-label">CNPJ</label>
+              <label class="toggle-label">
+                <input type="checkbox" class="toggle-check" (change)="toggleCnpjField()" />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                <span class="toggle-text">Não possuo CNPJ</span>
+              </label>
+            </div>
+            <input class="field-input" type="text" placeholder="00.000.000/0001-00"
+              [(ngModel)]="business.cnpj" name="cnpj"
+              [disabled]="!possuiCnpj" [class.disabled]="!possuiCnpj" />
           </div>
-        </div>
-        <div class="col">
-          <div class="input-group">
-            <label for="city">Cidade</label>
-            <input type="text" id="city" class="form-control" required [(ngModel)]="business.cidade" name="cidade" #city="ngModel">
-          </div>
-        </div>
-        <div class="col">
-            <div class="input-group">
-              <label for="state">Estado</label>
-              <input type="text" id="state" class="form-control" required [(ngModel)]="business.estado" name="estado" #state="ngModel">
+
+          <!-- Tipo de negócio -->
+          <div class="field">
+            <label class="field-label">Tipo de negócio <span class="req">*</span></label>
+            <div class="select-wrapper">
+              <select class="field-input field-select"
+                required [(ngModel)]="business.tipo" name="tipo" #tipo="ngModel"
+                [class.error]="tipo.invalid && tipo.touched">
+                <option value="" disabled selected>Selecione a categoria</option>
+                <optgroup label="GASTRONOMIA">
+                  <option value="restaurante">Restaurante</option>
+                  <option value="churrascaria">Churrascaria / Steakhouse</option>
+                  <option value="bar">Bar</option>
+                  <option value="boteco">Boteco / Bar de Esquina</option>
+                  <option value="pub">Pub / Cervejaria</option>
+                  <option value="adega_winebar">Adega / Wine Bar</option>
+                  <option value="hamburgueria">Hamburgueria</option>
+                  <option value="cafeteria">Cafeteria / Confeitaria</option>
+                  <option value="sorveteria_acai">Sorveteria / Açaí</option>
+                  <option value="food_truck">Food Truck / Comida de Rua</option>
+                </optgroup>
+                <optgroup label="NOITE E MÚSICA">
+                  <option value="balada">Balada / Boate</option>
+                  <option value="rave_festa_eletronica">Rave / Festa Eletrônica</option>
+                  <option value="casa_sertaneja">Casa Sertaneja</option>
+                  <option value="casa_de_show">Casa de Show</option>
+                  <option value="musica_ao_vivo">Música ao Vivo</option>
+                  <option value="lounge">Lounge / Rooftop</option>
+                  <option value="roda_de_samba">Roda de Samba</option>
+                  <option value="forro">Casa de Forró</option>
+                  <option value="karaoke">Karaokê</option>
+                  <option value="tabacaria_narguile">Tabacaria / Narguilé</option>
+                </optgroup>
+                <optgroup label="CULTURA E LAZER">
+                  <option value="cinema">Cinema</option>
+                  <option value="teatro">Teatro</option>
+                  <option value="museu_exposicao">Museu / Galeria</option>
+                  <option value="espaco_cultural">Espaço Cultural</option>
+                  <option value="stand_up">Stand-up</option>
+                  <option value="feira_de_rua">Feira de Rua / Gastronômica</option>
+                  <option value="ponto_turistico">Ponto Turístico / Mirante</option>
+                </optgroup>
+                <optgroup label="JOGOS E ESPORTES">
+                  <option value="escape_room">Escape Room</option>
+                  <option value="kartodromo">Kartódromo</option>
+                  <option value="arcade_fliperama">Arcade / Fliperama</option>
+                  <option value="futebol_society">Quadra de Futebol</option>
+                  <option value="beach_tennis_volei">Beach Tennis / Vôlei</option>
+                  <option value="boliche_sinuca">Boliche / Sinuca</option>
+                </optgroup>
+                <optgroup label="FITNESS E BEM-ESTAR">
+                  <option value="academia_crossfit">Academia / CrossFit</option>
+                  <option value="estudio_pilates_yoga">Pilates / Yoga</option>
+                  <option value="spa">Spa</option>
+                  <option value="salao_beleza">Salão / Estética</option>
+                  <option value="barbearia_premium">Barbearia Premium</option>
+                </optgroup>
+                <optgroup label="EVENTOS E OUTROS">
+                  <option value="festival">Festival</option>
+                  <option value="beach_club">Beach Club</option>
+                  <option value="clube_piscina">Clube / Day Use</option>
+                  <option value="espaco_eventos">Espaço de Eventos</option>
+                  <option value="outro">Outro</option>
+                </optgroup>
+              </select>
+              <span class="select-chevron">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="6 9 12 15 18 9"/></svg>
+              </span>
             </div>
           </div>
-      </div> <hr class="my-4">
 
-      <div class="input-group">
-        <label for="businessType">Tipo de Negócio</label>
-        <select class="form-control" id="businessType" required [(ngModel)]="business.tipo" name="tipo" #tipo="ngModel">
-  <option value="" disabled selected>Selecione a categoria principal do seu negócio</option>
-  
-  <optgroup label="GASTRONOMIA">
-    <option value="restaurante">Restaurante</option>
-    <option value="churrascaria">Churrascaria / Steakhouse</option>
-    <option value="bar">Bar</option>
-    <option value="boteco">Boteco / Bar de Esquina</option>
-    <option value="pub">Pub / Cervejaria</option>
-    <option value="adega_winebar">Adega / Wine Bar</option>
-    <option value="hamburgueria">Hamburgueria</option>
-    <option value="cafeteria">Cafeteria / Confeitaria</option>
-    <option value="sorveteria_acai">Sorveteria / Açaí</option>
-    <option value="food_truck">Food Truck / Comida de Rua</option>
-  </optgroup>
-  
-  <optgroup label="NOITE E MÚSICA">
-    <option value="balada">Balada / Boate</option>
-    <option value="rave_festa_eletronica">Rave / Festa Eletrônica</option>
-    <option value="casa_sertaneja">Casa Sertaneja</option>
-    <option value="casa_de_show">Casa de Show</option>
-    <option value="musica_ao_vivo">Música ao Vivo</option>
-    <option value="casa_de_jazz">Casa de Jazz / Blues</option>
-    <option value="roda_de_samba">Roda de Samba</option>
-    <option value="forro">Casa de Forró</option>
-    <option value="karaoke">Karaokê</option>
-    <option value="lounge">Lounge / Rooftop</option>
-    <option value="tabacaria_narguile">Tabacaria / Lounge de Narguilé</option>
-  </optgroup>
+        </div>
 
-  <optgroup label="CULTURA E LAZER">
-    <option value="shopping">Shopping / Centro Comercial</option>
-    <option value="parque_de_diversoes">Parque de Diversões / Aquático</option>
-    <option value="espaco_cultural">Espaço Cultural / SESC</option>
-    <option value="cinema">Cinema</option>
-    <option value="teatro">Teatro</option>
-    <option value="museu_exposicao">Museu / Galeria de Arte</option>
-    <option value="stand_up">Show de Stand-up</option>
-    <option value="livraria">Livraria</option>
-    <option value="feira_de_rua">Feira de Rua / Gastronômica</option>
-    <option value="ponto_turistico">Ponto Turístico / Mirante</option>
-  </optgroup>
-
-  <optgroup label="JOGOS E ESPORTES">
-    <option value="boliche_sinuca">Boliche / Salão de Sinuca</option>
-    <option value="escape_room">Escape Room</option>
-    <option value="laser_tag_paintball">Laser Tag / Paintball</option>
-    <option value="kartodromo">Kartódromo</option>
-    <option value="escalada_indoor">Escalada Indoor / Boulder</option>
-    <option value="clube_de_tiro">Clube de Tiro</option>
-    <option value="arcade_fliperama">Arcade / Fliperama</option>
-    <option value="futebol_society">Quadra de Futebol</option>
-    <option value="beach_tennis_volei">Quadra de Beach Tennis / Vôlei</option>
-    <option value="pista_de_skate">Pista de Skate</option>
-  </optgroup>
-  
-  <optgroup label="FITNESS E BEM-ESTAR">
-    <option value="academia_crossfit">Academia / CrossFit</option>
-    <option value="estudio_pilates_yoga">Estúdio de Pilates / Yoga</option>
-    <option value="centro_esportivo">Centro de Treinamento Esportivo</option>
-  </optgroup>
-
-  <optgroup label="RELAX E BELEZA">
-      <option value="spa">Spa</option>
-      <option value="salao_beleza">Salão de Beleza / Estética</option>
-      <option value="barbearia_premium">Barbearia Premium</option>
-  </optgroup>
-
-  <optgroup label="EVENTOS E OUTROS">
-    <option value="festival">Festival</option>
-    <option value="espaco_eventos">Espaço de Eventos</option>
-    <option value="clube_piscina">Clube / Piscina (Day Use)</option>
-    <option value="beach_club">Beach Club</option>
-    <option value="parque_ar_livre">Parque / Ao Ar Livre</option>
-    <option value="outro">Outro</option>
-  </optgroup>
-</select>
+        <div class="step-actions">
+          <button type="button" class="btn-next" (click)="goToStep(2)"
+            [disabled]="!business.nomeFantasia || !business.tipo">
+            Continuar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
       </div>
 
-      <div class="form-check mt-4">
-        <input type="checkbox" class="form-check-input" id="terms" required name="terms" ngModel #terms="ngModel">
-        <label class="form-check-label" for="terms">
-          Eu aceito os <a href="#">Termos de Serviço</a> e a <a href="#">Política de Privacidade</a>.
-        </label>
+      <!-- ══ STEP 2: Contato ══ -->
+      <div class="step-panel" [class.active]="currentStep === 2">
+        <div class="step-header">
+          <span class="step-eyebrow">Passo 2 de 3</span>
+          <h2 class="step-title">Contato e acesso</h2>
+          <p class="step-desc">Como os clientes — e você — vão te encontrar.</p>
+        </div>
+
+        <div class="fields">
+
+          <div class="field">
+            <label class="field-label">E-mail de contato <span class="req">*</span></label>
+            <input class="field-input" type="email" placeholder="contato@seunegocio.com"
+              required email [(ngModel)]="business.email" name="email" #bemail="ngModel"
+              [class.error]="bemail.invalid && bemail.touched" />
+            <span class="field-err" *ngIf="bemail.invalid && bemail.touched">E-mail inválido</span>
+          </div>
+
+          <div class="field">
+            <label class="field-label">Telefone / WhatsApp <span class="req">*</span></label>
+            <input class="field-input" type="tel" placeholder="(11) 99999-9999"
+              required [(ngModel)]="business.telefone" name="telefone" #telefone="ngModel"
+              [class.error]="telefone.invalid && telefone.touched" />
+          </div>
+
+          <div class="fields-row">
+            <div class="field">
+              <label class="field-label">Senha <span class="req">*</span></label>
+              <div class="input-pw-wrap">
+                <input class="field-input" [type]="passwordFieldType" placeholder="Mínimo 6 caracteres"
+                  required minlength="6" [(ngModel)]="business.password" name="password" #bpassword="ngModel"
+                  [class.error]="bpassword.invalid && bpassword.touched" />
+                <button type="button" class="pw-toggle" (click)="togglePasswordVisibility()">
+                  <svg *ngIf="passwordFieldType === 'password'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg *ngIf="passwordFieldType === 'text'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="field-label">Confirmar senha <span class="req">*</span></label>
+              <div class="input-pw-wrap">
+                <input class="field-input" [type]="confirmPasswordFieldType" placeholder="Repita a senha"
+                  required [(ngModel)]="business.confirmPassword" name="confirmPassword"
+                  [class.error]="business.confirmPassword && business.password !== business.confirmPassword" />
+                <button type="button" class="pw-toggle" (click)="toggleConfirmPasswordVisibility()">
+                  <svg *ngIf="confirmPasswordFieldType === 'password'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  <svg *ngIf="confirmPasswordFieldType === 'text'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                </button>
+              </div>
+              <span class="field-err" *ngIf="business.confirmPassword && business.password !== business.confirmPassword">As senhas não coincidem</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="step-actions">
+          <button type="button" class="btn-back" (click)="goToStep(1)">← Voltar</button>
+          <button type="button" class="btn-next" (click)="goToStep(3)"
+            [disabled]="!business.email || !business.telefone || !business.password || business.password !== business.confirmPassword">
+            Continuar
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
       </div>
 
-      <button type="submit" class="btn-livvi" [disabled]="businessForm.invalid">Criar Conta de Negócio ✨</button>
+      <!-- ══ STEP 3: Localização ══ -->
+      <div class="step-panel" [class.active]="currentStep === 3">
+        <div class="step-header">
+          <span class="step-eyebrow">Passo 3 de 3</span>
+          <h2 class="step-title">Onde você está?</h2>
+          <p class="step-desc">Para aparecer no radar das pessoas certas.</p>
+        </div>
+
+        <div class="fields">
+
+          <div class="field field-sm">
+            <label class="field-label">CEP <span class="req">*</span></label>
+            <input class="field-input" type="text" placeholder="00000-000"
+              required [(ngModel)]="business.cep" name="cep" #cep="ngModel"
+              [class.error]="cep.invalid && cep.touched" />
+          </div>
+
+          <div class="field">
+            <label class="field-label">Endereço <span class="req">*</span></label>
+            <input class="field-input" type="text" placeholder="Rua, Av, Praça..."
+              required [(ngModel)]="business.endereco" name="endereco" #address="ngModel"
+              [class.error]="address.invalid && address.touched" />
+          </div>
+
+          <div class="fields-row">
+            <div class="field field-sm">
+              <label class="field-label">Número <span class="req">*</span></label>
+              <input class="field-input" type="text" placeholder="123"
+                required [(ngModel)]="business.numero" name="numero" />
+            </div>
+            <div class="field">
+              <label class="field-label">Complemento</label>
+              <input class="field-input" type="text" placeholder="Sala, bloco..."
+                [(ngModel)]="business.complemento" name="complemento" />
+            </div>
+          </div>
+
+          <div class="fields-row fields-row-3">
+            <div class="field">
+              <label class="field-label">Bairro <span class="req">*</span></label>
+              <input class="field-input" type="text" placeholder="Bairro"
+                required [(ngModel)]="business.bairro" name="bairro" />
+            </div>
+            <div class="field">
+              <label class="field-label">Cidade <span class="req">*</span></label>
+              <input class="field-input" type="text" placeholder="Cidade"
+                required [(ngModel)]="business.cidade" name="cidade" />
+            </div>
+            <div class="field field-xs">
+              <label class="field-label">UF <span class="req">*</span></label>
+              <input class="field-input" type="text" placeholder="SP" maxlength="2"
+                required [(ngModel)]="business.estado" name="estado" />
+            </div>
+          </div>
+
+          <label class="terms-label">
+            <input type="checkbox" class="terms-check" required name="terms" ngModel #terms="ngModel" />
+            <span>Li e aceito os <a href="#" class="terms-link">Termos de Serviço</a> e a <a href="#" class="terms-link">Política de Privacidade</a></span>
+          </label>
+
+        </div>
+
+        <div class="step-actions">
+          <button type="button" class="btn-back" (click)="goToStep(2)">← Voltar</button>
+          <button type="submit" class="btn-submit" [disabled]="businessForm.invalid">
+            Criar minha conta
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
+      </div>
 
     </form>
-  </div>
+  </main>
+
 </div>
-<div class="modal-overlay" *ngIf="showCnpjWarning">
-  <div class="modal-cnpj">
-    <h4>A importância do CNPJ</h4>
-    <p>
-      Cadastrar seu CNPJ (mesmo que seja de MEI) aumenta a confiança dos usuários e libera funcionalidades exclusivas no futuro. Se você tiver um, recomendamos fortemente que o adicione!
-    </p>
-    <button class="btn-ok" (click)="closeCnpjWarning()">Entendi!</button>
+
+<!-- Modal CNPJ -->
+<div class="modal-backdrop" *ngIf="showCnpjWarning" (click)="closeCnpjWarning()"></div>
+<div class="modal-box" *ngIf="showCnpjWarning">
+  <div class="modal-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
   </div>
+  <h4 class="modal-title">CNPJ aumenta sua credibilidade</h4>
+  <p class="modal-body">Negócios com CNPJ (mesmo MEI) aparecem mais alto nos resultados e transmitem mais confiança para os usuários. Se você tiver, recomendamos adicionar.</p>
+  <button class="modal-btn" (click)="closeCnpjWarning()">Entendido</button>
 </div>

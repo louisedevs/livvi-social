@@ -12,72 +12,36 @@ import { FormsModule } from '@angular/forms';
 })
 export class BusinessComponent implements OnInit, OnDestroy {
 
-  // --- O "MOLDE" PARA OS DADOS DO FORMULÁRIO ---
+  currentStep = 1;
+
   business = {
-    nomeFantasia: '',
-    cnpj: '',
-    email: '',
-    telefone: '',
-    password: '',
-    confirmPassword: '',
-    cep: '',
-    endereco: '',
-    numero: '',
-    complemento: '',
-    bairro: '',
-    cidade: '',
-    estado: '',
-    pais: '',
-    tipo: ''
+    nomeFantasia: '', cnpj: '', email: '', telefone: '',
+    password: '', confirmPassword: '',
+    cep: '', endereco: '', numero: '', complemento: '',
+    bairro: '', cidade: '', estado: '', tipo: ''
   };
 
-  // --- VARIÁVEIS PARA O "OLHINHO" DA SENHA ---
-  passwordFieldType: string = 'password';
-  confirmPasswordFieldType: string = 'password';
-
-  // --- VARIÁVEIS PARA A LÓGICA DO CNPJ ---
-  possuiCnpj: boolean = true;
-  showCnpjWarning: boolean = false;
+  passwordFieldType        = 'password';
+  confirmPasswordFieldType = 'password';
+  possuiCnpj               = true;
+  showCnpjWarning          = false;
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  // --- LÓGICA PARA O FUNDO PRETO DA PÁGINA ---
-  ngOnInit(): void {
-    this.document.body.classList.add('background-preto');
-  }
+  ngOnInit()    { this.document.body.classList.add('background-preto'); }
+  ngOnDestroy() { this.document.body.classList.remove('background-preto'); }
 
-  ngOnDestroy(): void {
-    this.document.body.classList.remove('background-preto');
-  }
+  goToStep(step: number) { this.currentStep = step; }
 
-  // --- FUNÇÕES DO NOSSO FORMULÁRIO ---
+  onSubmit() { console.log('Business enviado:', this.business); }
 
-  // Função chamada ao clicar em "Criar Conta"
-  onSubmit() {
-    console.log('Formulário de negócio enviado!', this.business);
-  }
+  togglePasswordVisibility()        { this.passwordFieldType        = this.passwordFieldType        === 'password' ? 'text' : 'password'; }
+  toggleConfirmPasswordVisibility() { this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password'; }
 
-  // Função para mostrar/esconder a senha
-  togglePasswordVisibility(): void {
-    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
-  }
-
-  // Função para mostrar/esconder a confirmação de senha
-  toggleConfirmPasswordVisibility(): void {
-    this.confirmPasswordFieldType = this.confirmPasswordFieldType === 'password' ? 'text' : 'password';
-  }
-
-  // Função que o checkbox do CNPJ chama
   toggleCnpjField() {
     this.possuiCnpj = !this.possuiCnpj;
-    if (!this.possuiCnpj) {
-      this.showCnpjWarning = true;
-      this.business.cnpj = '';
-    }
+    if (!this.possuiCnpj) { this.showCnpjWarning = true; this.business.cnpj = ''; }
   }
 
-  // Função que o botão "Entendi!" da mensagem de aviso chama
-  closeCnpjWarning() {
-    this.showCnpjWarning = false;
-  }
+  closeCnpjWarning() { this.showCnpjWarning = false; }
 }
